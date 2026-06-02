@@ -1,0 +1,199 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Shaun Benny — Python Django Developer{% endblock %}
+
+{% block content %}
+
+<nav id="navbar">
+    <div class="nav-brand">SB</div>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="{% url 'users:login' %}">Admin</a></li>
+    </ul>
+    <button id="theme-toggle">☀️</button>
+</nav>
+
+<section id="hero">
+    <div class="hero-content">
+        <p class="hero-greeting">Hello, I'm</p>
+        <h1 class="hero-name">Shaun Benny</h1>
+        <h2 class="hero-role">Python Django Developer | Full Stack | DevOps | Cloud Deployment</h2>
+        <p class="hero-tagline">I build scalable backend APIs and deploy applications on cloud servers with a focus on performance, reliability, and DevOps best practices.</p>
+        <div class="hero-actions">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+<a href="{% static 'shaun_benny_resume.pdf' %}" class="btn btn-outline" id="resume-download" download>Download Resume</a>        </div>
+</section>
+
+<section id="about">
+    <div class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-grid">
+            <div class="about-img">
+                <img src="{% static '110600998.png' %}" alt="Shaun Benny" onerror="this.style.background='#ccc';this.removeAttribute('src')">
+            </div>
+            <div class="about-text">
+                <p>Python Django Developer with 2+ years of experience in full-stack development using Django and Django REST Framework. Skilled in building scalable backend APIs, deploying applications on cloud servers, and managing infrastructure on Linux. Delivered production-ready solutions for fintech, healthcare, and enterprise clients.</p>
+                <div class="about-info">
+                    <span><strong>Location:</strong> India</span>
+                    <span><strong>Email:</strong> shaunbenny99@gmail.com</span>
+                    <span><strong>Phone:</strong> +91-9895661029</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="skills">
+    <div class="container">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-grid" id="skills-container">
+            {% for skill in skills %}
+            <div class="skill-card">
+                <span class="skill-name">{{ skill.skill_name }}</span>
+                <div class="skill-bar">
+                    <div class="skill-fill" style="width:{{ skill.skill_level }}%"></div>
+                </div>
+            </div>
+            {% empty %}
+            <p>No skills added yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section id="projects">
+    <div class="container">
+        <h2 class="section-title">Projects</h2>
+        <div class="project-filter">
+            <input type="text" id="project-search" placeholder="Search projects...">
+        </div>
+        <div class="projects-grid" id="projects-container">
+            {% for project in projects %}
+            <div class="project-card" data-title="{{ project.title|lower }}" data-tech="{{ project.technology_used|lower }}">
+                <h3>{{ project.title }}</h3>
+                <p>{{ project.description }}</p>
+                <p class="project-tech">{{ project.technology_used }}</p>
+                <div class="project-links">
+                    {% if project.github_link %}
+                    <a href="{{ project.github_link }}" target="_blank">GitHub</a>
+                    {% endif %}
+                    {% if project.live_link %}
+                    <a href="{{ project.live_link }}" target="_blank">Live</a>
+                    {% endif %}
+                </div>
+            </div>
+            {% empty %}
+            <p>No projects added yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section id="experience">
+    <div class="container">
+        <h2 class="section-title">Experience</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Python Django Developer</h3>
+                    <span class="timeline-company">Infobuddha Technologies Pvt Ltd</span>
+                    <span class="timeline-date">Feb 2025 – Present</span>
+                    <p>Working as a backend-focused Python Django developer on production-grade fintech and digital commerce platforms. Managed deployments on AWS EC2 using Nginx and Gunicorn; handled database design, query optimization, and data consistency across MySQL/PostgreSQL environments.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-content">
+                    <h3>Python Django Developer</h3>
+                    <span class="timeline-company">Efuturex Technologies</span>
+                    <span class="timeline-date">Mar 2023 – Jan 2025</span>
+                    <p>Led development of multiple client projects including a multiplayer card gaming platform deployed on AWS EC2. Developed billing, inventory, invoicing, and ERP modules using Django, HTML, CSS, and JS; migrated legacy codebases from Python 2 to Python 3.10.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="education">
+    <div class="container">
+        <h2 class="section-title">Education</h2>
+        <div class="certs-grid">
+            <div class="cert-card">
+                <div class="cert-icon">🎓</div>
+                <h3>Python Full Stack with Cloud Computing</h3>
+                <p>Besant Technologies, Bangalore</p>
+                <span class="cert-date">Apr 2024 – Sep 2024</span>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon">🎓</div>
+                <h3>Full Stack Web Development</h3>
+                <p>Efuturex Technologies Pvt Ltd, Thrissur, Kerala</p>
+                <span class="cert-date">Jul 2022 – Dec 2022</span>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon">🎓</div>
+                <h3>BCom Computer Application</h3>
+                <p>Naipunya Institute of Management and Information Technology, Koratty, Kerala</p>
+                <span class="cert-date">Jun 2017 – May 2020</span>
+            </div>
+            <div class="cert-card">
+                <div class="cert-icon">🎓</div>
+                <h3>Higher Secondary Education - C.B.S.E</h3>
+                <p>Bhavan's Vidya Mandir, Irinjalakuda</p>
+                <span class="cert-date">2015 – 2017</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="container">
+        <h2 class="section-title">Contact Me</h2>
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <p>Have a project in mind or want to talk? Drop a message.</p>
+                <ul>
+                    <li>📧 shaunbenny99@gmail.com</li>
+                    <li>📞 +91-9895661029</li>
+                    <li>💼 <a href="https://linkedin.com/in/shaun-benny-73b5a8247" target="_blank">LinkedIn</a></li>
+                    <li>🐙 <a href="https://github.com/shaunbenny24" target="_blank">GitHub</a></li>
+                    <li>📝 <a href="https://medium.com/@shaunchukkiriyan" target="_blank">Medium</a></li>
+                </ul>
+            </div>
+            <form method="post" action="{% url 'core:contact-create' %}" class="contact-form">
+                {% csrf_token %}
+                {% for field in contact_form %}
+                <div class="form-group">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {% if field.errors %}
+                        <span class="form-error">{{ field.errors.0 }}</span>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>Built with Django &amp; ❤️ by Shaun Benny &copy; 2026</p>
+</footer>
+
+<script>
+    document.getElementById('project-search').addEventListener('input', function () {
+        const q = this.value.toLowerCase();
+        document.querySelectorAll('.project-card').forEach(card => {
+            const match = card.dataset.title.includes(q) || card.dataset.tech.includes(q);
+            card.style.display = match ? '' : 'none';
+        });
+    });
+</script>
+{% endblock %}

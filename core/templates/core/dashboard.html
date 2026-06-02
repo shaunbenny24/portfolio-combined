@@ -1,0 +1,218 @@
+{% extends "core/base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+{% load dict_extras %}
+{% block content %}
+<div class="dashboard-layout">
+
+    <aside class="sidebar">
+        <div class="sidebar-brand">Admin Panel</div>
+        <nav class="sidebar-nav">
+            <a href="#projects-section" class="sidebar-link active">Projects</a>
+            <a href="#skills-section" class="sidebar-link">Skills</a>
+            <a href="#contacts-section" class="sidebar-link">Messages</a>
+        </nav>
+        <a href="{% url 'users:logout' %}" class="sidebar-logout">Logout</a>
+    </aside>
+
+    <main class="dashboard-main">
+
+        <!-- PROJECTS -->
+        <section id="projects-section">
+            <div class="dash-section-header">
+                <h2>Projects</h2>
+                <a href="#project-add-form" class="btn btn-primary">+ Add Project</a>
+            </div>
+
+            <!-- ADD FORM -->
+            <div id="project-add-form" class="dash-form">
+                <h3>Add Project</h3>
+                <form method="post" action="{% url 'core:project-add' %}">
+                    {% csrf_token %}
+                    {% for field in project_form %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                            <span class="form-error">{{ field.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a href="#" class="btn btn-outline">Cancel</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- PROJECTS TABLE -->
+            <table class="dash-table">
+                <thead>
+                    <tr>
+                        <th>Title</th><th>Tech</th><th>Links</th><th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for project in projects %}
+                    <tr>
+                        <td>{{ project.title }}</td>
+                        <td>{{ project.technology_used }}</td>
+                        <td>
+                            {% if project.github_link %}<a href="{{ project.github_link }}" target="_blank">GitHub</a>{% endif %}
+                            {% if project.live_link %}<a href="{{ project.live_link }}" target="_blank">Live</a>{% endif %}
+                        </td>
+                        <td>
+                            <a href="#project-edit-{{ project.pk }}" class="btn btn-outline btn-sm">Edit</a>
+                            <form method="post" action="{% url 'core:project-delete' project.pk %}" style="display:inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Delete this project?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+
+                    <!-- INLINE EDIT ROW -->
+                    <tr id="project-edit-{{ project.pk }}" class="edit-row">
+                        <td colspan="4">
+                            <form method="post" action="{% url 'core:project-edit' project.pk %}">
+                                {% csrf_token %}
+                                {% for field in project_edit_forms|get_item:project.pk %}
+                                <div class="form-group">
+                                    {{ field.label_tag }}
+                                    {{ field }}
+                                    {% if field.errors %}
+                                        <span class="form-error">{{ field.errors.0 }}</span>
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <a href="#" class="btn btn-outline">Cancel</a>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="4">No projects yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills-section">
+            <div class="dash-section-header">
+                <h2>Skills</h2>
+                <a href="#skill-add-form" class="btn btn-primary">+ Add Skill</a>
+            </div>
+
+            <!-- ADD FORM -->
+            <div id="skill-add-form" class="dash-form">
+                <h3>Add Skill</h3>
+                <form method="post" action="{% url 'core:skill-add' %}">
+                    {% csrf_token %}
+                    {% for field in skill_form %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.errors %}
+                            <span class="form-error">{{ field.errors.0 }}</span>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <a href="#" class="btn btn-outline">Cancel</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- SKILLS TABLE -->
+            <table class="dash-table">
+                <thead>
+                    <tr><th>Skill</th><th>Level</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                    {% for skill in skills %}
+                    <tr>
+                        <td>{{ skill.skill_name }}</td>
+                        <td>{{ skill.skill_level }}</td>
+                        <td>
+                            <a href="#skill-edit-{{ skill.pk }}" class="btn btn-outline btn-sm">Edit</a>
+                            <form method="post" action="{% url 'core:skill-delete' skill.pk %}" style="display:inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Delete this skill?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+
+                    <!-- INLINE EDIT ROW -->
+                    <tr id="skill-edit-{{ skill.pk }}" class="edit-row">
+                        <td colspan="3">
+                            <form method="post" action="{% url 'core:skill-edit' skill.pk %}">
+                                {% csrf_token %}
+                                {% for field in skill_edit_forms|get_item:skill.pk %}
+                                <div class="form-group">
+                                    {{ field.label_tag }}
+                                    {{ field }}
+                                    {% if field.errors %}
+                                        <span class="form-error">{{ field.errors.0 }}</span>
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                                <div class="form-actions">
+                                    <button type="submit" class="btn btn-primary">Update</button>
+                                    <a href="#" class="btn btn-outline">Cancel</a>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="3">No skills yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- CONTACTS -->
+        <section id="contacts-section">
+            <div class="dash-section-header">
+                <h2>Contact Messages</h2>
+            </div>
+            <table class="dash-table">
+                <thead>
+                    <tr><th>Name</th><th>Email</th><th>Message</th><th>Date</th><th>Actions</th></tr>
+                </thead>
+                <tbody>
+                    {% for contact in contacts %}
+                    <tr>
+                        <td>{{ contact.name }}</td>
+                        <td>{{ contact.email }}</td>
+                        <td>{{ contact.message }}</td>
+                        <td>{{ contact.created_at|date:"d M Y" }}</td>
+                        <td>
+                            <form method="post" action="{% url 'core:contact-delete' contact.pk %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm"
+                                    onclick="return confirm('Delete this message?')">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr><td colspan="5">No messages yet.</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+</div>
+
+<style>
+    .edit-row { display: none; }
+    .edit-row:target { display: table-row; }
+    .dash-form { display: none; }
+    .dash-form:target { display: block; }
+</style>
+
+{% endblock %}
