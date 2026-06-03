@@ -54,6 +54,7 @@
                 <tbody>
                     {% for project in projects %}
                     <tr>
+                        <td>{{project.id}}</td>
                         <td>{{ project.title }}</td>
                         <td>{{ project.technology_used }}</td>
                         <td>
@@ -134,6 +135,7 @@
                 <tbody>
                     {% for skill in skills %}
                     <tr>
+                        <td>{{skill.id }}</td>
                         <td>{{ skill.skill_name }}</td>
                         <td>{{ skill.skill_level }}</td>
                         <td>
@@ -186,6 +188,7 @@
                 <tbody>
                     {% for contact in contacts %}
                     <tr>
+                        <td>{{contact.id}}</td>
                         <td>{{ contact.name }}</td>
                         <td>{{ contact.email }}</td>
                         <td>{{ contact.message }}</td>
