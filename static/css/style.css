@@ -661,7 +661,7 @@ section {
 #contact { background: var(--bg); }
 
 .contact-wrapper {
-  display: grid;
+  /* display: grid; */
   grid-template-columns: 1fr 1.5fr;
   gap: 6rem;
   align-items: start;
