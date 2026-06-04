@@ -4,19 +4,126 @@
 
 {% block content %}
 
+<!-- ══════════════════════ NAVBAR ══════════════════════ -->
 <nav id="navbar">
-    <div class="nav-brand">SB</div>
-    <ul class="nav-links">
+  <div class="nav-inner">
+ 
+    <!-- Logo -->
+    <a href="#" class="nav-brand">
+      <div class="brand-icon">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="10" width="16" height="13" rx="1.5"
+                stroke="currentColor" stroke-width="1.8" fill="none"/>
+          <path d="M3 11L13 3L23 11" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="10" y="16" width="6" height="7" rx="1"
+                stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <rect x="7" y="12.5" width="3" height="2.5" rx="0.5" fill="currentColor" opacity="0.5"/>
+          <rect x="16" y="12.5" width="3" height="2.5" rx="0.5" fill="currentColor" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="brand-text-block">
+        <div class="brand-name">SB<span class="brand-dot">.</span></div>
+        <div class="brand-sub">Portfolio</div>
+      </div>
+    </a>
+ 
+    <!-- Right: links + actions -->
+    <div class="nav-right">
+      <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#experience">Experience</a></li>
         <li><a href="#education">Education</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="{% url 'users:login' %}">Admin</a></li>
-    </ul>
-    <button id="theme-toggle">☀️</button>
+        <li class="nav-pill"><a href="{% url 'users:login' %}">Admin</a></li>
+      </ul>
+ 
+      <div class="nav-actions">
+        <button id="theme-toggle" aria-label="Toggle theme">
+          <span id="theme-icon">☀️</span>
+        </button>
+        <button id="menu-toggle" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+ 
+  </div>
 </nav>
+ 
+<!-- ══════════════════════ SIDEBAR ══════════════════════ -->
+<div id="sidebar-overlay" aria-hidden="true"></div>
+ 
+<aside id="sidebar" role="dialog" aria-label="Mobile navigation" aria-modal="true">
+ 
+  <div class="sidebar-header">
+    <a href="#" class="nav-brand">
+      <div class="brand-icon">
+        <svg width="24" height="24" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="5" y="10" width="16" height="13" rx="1.5"
+                stroke="currentColor" stroke-width="1.8" fill="none"/>
+          <path d="M3 11L13 3L23 11" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="10" y="16" width="6" height="7" rx="1"
+                stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <rect x="7" y="12.5" width="3" height="2.5" rx="0.5" fill="currentColor" opacity="0.5"/>
+          <rect x="16" y="12.5" width="3" height="2.5" rx="0.5" fill="currentColor" opacity="0.5"/>
+        </svg>
+      </div>
+      <div class="brand-text-block">
+        <div class="brand-name">SB<span class="brand-dot">.</span></div>
+        <div class="brand-sub">Portfolio</div>
+      </div>
+    </a>
+    <button class="sidebar-close" id="sidebar-close" aria-label="Close menu">✕</button>
+  </div>
+ 
+  <div class="sidebar-body">
+ 
+    <div class="sidebar-card">
+      <div class="sidebar-card-tag">
+        <svg width="8" height="8" viewBox="0 0 8 8">
+          <circle cx="4" cy="4" r="3" fill="currentColor" opacity=".35"/>
+          <circle cx="4" cy="4" r="1.5" fill="currentColor"/>
+        </svg>
+        Open to work
+      </div>
+      <h3>Sharp Code,<br>Clean Design.</h3>
+      <p>Building thoughtful digital experiences — one pixel and one commit at a time.</p>
+      <a href="#contact" class="sidebar-card-btn" id="sidebar-cta">
+        Say hello
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 6h8M7 3l3 3-3 3"/>
+        </svg>
+      </a>
+    </div>
+ 
+    <ul class="sidebar-nav">
+      <li><a href="#about"      class="sidebar-link">About</a></li>
+      <li><a href="#skills"     class="sidebar-link">Skills</a></li>
+      <li><a href="#projects"   class="sidebar-link">Projects</a></li>
+      <li><a href="#experience" class="sidebar-link">Experience</a></li>
+      <li><a href="#education"  class="sidebar-link">Education</a></li>
+      <li><a href="#contact"    class="sidebar-link">Contact</a></li>
+      <li class="sidebar-pill">
+        <a href="{% url 'users:login' %}" class="sidebar-link">Admin Login →</a>
+      </li>
+    </ul>
+ 
+    <div class="sidebar-footer">
+      <span class="sidebar-copyright">© SB Portfolio</span>
+      <button id="theme-toggle-sidebar" aria-label="Toggle theme">
+        <span id="theme-icon-sidebar">☀️</span>
+      </button>
+    </div>
+ 
+  </div>
+</aside>
+ 
+ 
 
 <section id="hero">
     <div class="hero-content">

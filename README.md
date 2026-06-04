@@ -1,21 +1,23 @@
-# portfolio-combined
 # Shaun Benny — Full Stack Developer Portfolio
+
+**Live Demo:** [https://portfolio-combined.onrender.com](https://portfolio-combined.onrender.com)
 
 A dynamic, full-stack portfolio website built with Python and Django. This project features a public-facing portfolio, a custom-built secure Admin Dashboard for managing content (Projects, Skills, Contact Messages), and a fully documented REST API.
 
-##  Features
+## Features
 
 * **Dynamic Content Management:** Add, edit, and delete Projects and Skills via a custom Admin Dashboard.
-* **Currently running on sqllite and will upgrade to postgres sql in proper ipadresss server 
+* **Automated Data Seeding:** Includes a custom management command to automatically populate the database with static resume data upon deployment to handle ephemeral disk wipes.
+* **Database:** Currently running on SQLite (temporary for free-tier hosting) and will upgrade to PostgreSQL on a dedicated server.
 * **REST API:** Built with Django REST Framework (DRF) to serve portfolio data.
-* **Interactive API Docs:** Auto-generated OpenAPI 3.0 documentation using Swagger UI (`drf-spectacular`)but currently there is no drf views so api wontbe visible to test in swagger.
-* **Production Ready:** Configured with WhiteNoise for static file serving, Gunicorn for the application server, and  database integration.
+* **Interactive API Docs:** Auto-generated OpenAPI 3.0 documentation using Swagger UI (`drf-spectacular`) (Note: Currently no DRF views are configured, so the API won't be visible to test in Swagger yet).
+* **Production Ready:** Configured with WhiteNoise for static file serving, Gunicorn for the application server, and database integration.
 * **Environment Security:** Secured using `python-dotenv` to manage secret keys and debug states.
 
-##  Tech Stack
+## Tech Stack
 
 * **Backend:** Python 3.13+, Django 6.x, Django REST Framework
-* **Database:** SQLite (Local Development) / SQLlite(temporary) (Production)
+* **Database:** SQLite (Local Development & Temporary Production)
 * **API Documentation:** drf-spectacular (Swagger)
 * **Deployment:** Render (PaaS), Gunicorn, WhiteNoise
 
